@@ -8,17 +8,16 @@ import com.foxmind.stock.domain.dto.response.InventoryResponse;
 import com.foxmind.stock.domain.entity.InventoryEntity;
 
 @Component
-public class ResponseMapper {
+public class InventoryResponseMapper {
 
     private final ModelMapper mapper = new ModelMapper();
 
-    public InventoryEntity convertInventoryRequestToInventoryEntity(InventoryRequest request) {
+    public InventoryEntity convertInventoryRequestToEntity(InventoryRequest request) {
         return this.mapper.map(request, InventoryEntity.class);
     }
 
-    public InventoryResponse convertIventoryEntityToInventoryResponse(InventoryEntity entity) {
+    public InventoryResponse convertIventoryEntityToResponse(InventoryEntity entity) {
         return this.mapper.map(entity, InventoryResponse.class);
     }
-
     
 }

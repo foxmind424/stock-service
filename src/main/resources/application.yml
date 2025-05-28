@@ -1,0 +1,8 @@
+spring: 
+    application:
+        name: stock
+    data:
+        mongodb: 
+            uri: mongodb://root:rootpass@localhost:27017/foxmind?authSource=admin
+            database: foxmind
+            auto-index-creation: true

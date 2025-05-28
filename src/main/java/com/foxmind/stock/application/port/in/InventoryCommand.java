@@ -4,6 +4,8 @@ import com.foxmind.stock.application.exception.InventoryInternalErrorException;
 import com.foxmind.stock.domain.dto.request.InventoryRequest;
 import com.foxmind.stock.domain.dto.response.InventoryResponse;
 
+import reactor.core.publisher.Mono;
+
 public interface InventoryCommand {
-    InventoryResponse create(InventoryRequest request) throws InventoryInternalErrorException;
+    Mono<InventoryResponse> create(InventoryRequest request) throws InventoryInternalErrorException;
 }
