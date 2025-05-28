@@ -1,5 +1,8 @@
 package com.foxmind.stock.adpater.out.persistence;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.foxmind.stock.application.exception.InventoryTransactionErrorException;
@@ -14,9 +17,11 @@ import reactor.core.publisher.Mono;
 public class InventoryPersistenceRepository implements InventoryRepository {
 
     private final SpringInventoryMongoRepository repository;
+    private final ReactiveMongoTemplate mongoTemplate;
 
-    public InventoryPersistenceRepository(SpringInventoryMongoRepository repository) {
+    public InventoryPersistenceRepository(SpringInventoryMongoRepository repository, ReactiveMongoTemplate mongoTemplate) {
         this.repository = repository;
+        this.mongoTemplate = mongoTemplate;
     }
 
     @Override
@@ -28,12 +33,13 @@ public class InventoryPersistenceRepository implements InventoryRepository {
 
     @Override
     public Flux<InventoryEntity> list(int page, int size) throws InventoryTransactionErrorException {
-        int skip = (page - 1) * size;
-        return this.repository.findAll()
-            .skip(skip)
-            .take(size)
-            .onErrorMap(exception ->
-                new InventoryTransactionErrorException("Error to database connection on save inventory", exception));
+        Query query = new Query()
+            .skip((long) page * size)
+            .limit(size)
+            .with(Sort.by(Sort.Direction.ASC, "name"));
+        return mongoTemplate.find(query, InventoryEntity.class)
+            .onErrorMap(exception -> 
+                new InventoryTransactionErrorException("Error to database connection on list inventory", exception));
     }
 
 }
