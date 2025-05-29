@@ -1,7 +1,10 @@
 # Projeto Foxmind - Stock Service
+
  Stock service
+
 ### Para executar a aplicação
-Tenha instalado na sua maquina o `Docker Engine`.
+
+Tenha instalado na sua maquina o <strong>Docker Engine</strong> e o <strong>Docker Compose</strong>.
 <br>
 - Execute o comando `docker compose build` para buildar a aplicação.
 - Execute o comando `docker compose up -d` para executar a aplicação.
