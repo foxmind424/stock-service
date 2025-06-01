@@ -42,4 +42,24 @@ public class InventoryPersistenceRepository implements InventoryRepository {
                 new InventoryTransactionErrorException("Error to database connection on list inventory", exception));
     }
 
+    @Override
+    public Mono<InventoryEntity> byId(String id) throws InventoryTransactionErrorException {
+        return this.repository.findById(id)
+            .onErrorMap(exception ->
+                new InventoryTransactionErrorException("Error to database connection on get inventory by id", exception));
+    }
+
+    @Override
+    public Mono<InventoryEntity> byName(String name) throws InventoryTransactionErrorException {
+        return this.repository.findByName(name)
+            .onErrorMap(exception ->
+                new InventoryTransactionErrorException("Error to database connection on get inventory by name", exception));
+    }
+
+    @Override
+    public Mono<Void> deleteById(String id) throws InventoryTransactionErrorException {
+        return this.repository.deleteById(id)
+            .onErrorMap(exception -> new InventoryTransactionErrorException("Error to database connection on delete inventory by id", exception));
+    }
+
 }
