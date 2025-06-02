@@ -1,4 +1,4 @@
-package com.foxmind.stock.infrastructure.persistence.openapi;
+package com.foxmind.stock.infrastructure.openapi;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

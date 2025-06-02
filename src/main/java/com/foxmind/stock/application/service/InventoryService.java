@@ -1,5 +1,7 @@
 package com.foxmind.stock.application.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.foxmind.stock.adpater.out.persistence.InventoryPersistenceRepository;
@@ -18,6 +20,8 @@ import reactor.core.publisher.Mono;
 @Service
 public class InventoryService implements InventoryCommand, InventoryQuery {
 
+    private static final Logger logger = LoggerFactory.getLogger(InventoryService.class);
+
     private final InventoryRepository repository;
     private final InventoryResponseMapper responseHelper;
 
@@ -28,6 +32,7 @@ public class InventoryService implements InventoryCommand, InventoryQuery {
 
     @Override
     public Mono<InventoryResponse> create(InventoryRequest request) throws InventoryInternalErrorException {
+        logger.info("Creating new inventory");
         return Mono.just(request)
                 .map(responseHelper::convertInventoryRequestToEntity)
                 .flatMap(repository::save)

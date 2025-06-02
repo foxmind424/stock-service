@@ -3,3 +3,8 @@ spring:
         name: stock-service
     profiles:
         active: dev
+logging:
+  level:
+    root: INFO
+    '[org.springframework.web]': DEBUG
+    '[com.foxmind.stock]': DEBUG

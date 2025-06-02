@@ -1,8 +1,20 @@
 spring:
-    data:
-        mongodb:
-            uri: mongodb://root:rootpass@mongo:27017/foxmind?authSource=admin
-            database: foxmind
-            auto-index-creation: true
+  data:
+    mongodb:
+      uri: mongodb://root:rootpass@mongo:27017/foxmind?authSource=admin
+      database: foxmind
+      auto-index-creation: true
+
 server:
   port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus
+
+  prometheus:
+    metrics:
+      export:
+        enabled: true
