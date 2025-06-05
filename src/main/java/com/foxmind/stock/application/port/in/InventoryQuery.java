@@ -11,4 +11,5 @@ public interface InventoryQuery {
     Flux<InventoryResponse> listAll(int page, int size) throws InventoryInternalErrorException;
     Mono<InventoryResponse> findById(String id) throws InventoryNotFoundErrorException, InventoryInternalErrorException;
     Mono<InventoryResponse> findByName(String name) throws InventoryNotFoundErrorException, InventoryInternalErrorException;
+    Mono<Long> count() throws InventoryInternalErrorException;
 }

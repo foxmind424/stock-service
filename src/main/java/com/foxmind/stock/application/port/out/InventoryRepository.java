@@ -12,4 +12,5 @@ public interface InventoryRepository {
     Mono<InventoryEntity> byId(String id) throws InventoryTransactionErrorException;
     Mono<InventoryEntity> byName(String name) throws InventoryTransactionErrorException;
     Mono<Void> deleteById(String id) throws InventoryTransactionErrorException;
+    Mono<Long> count() throws InventoryTransactionErrorException;
 }

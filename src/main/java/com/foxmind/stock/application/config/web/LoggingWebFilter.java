@@ -29,7 +29,7 @@ public class LoggingWebFilter implements WebFilter {
             })
             .doOnError(error -> {
                 long duration = System.currentTimeMillis() - startTime;
-
+                logger.info("⬅️ [{}] {} completed in {}ms", request.getMethod(), request.getURI(), duration);
             });
     }
 }

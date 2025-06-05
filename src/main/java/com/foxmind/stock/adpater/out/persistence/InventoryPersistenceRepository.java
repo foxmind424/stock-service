@@ -62,4 +62,10 @@ public class InventoryPersistenceRepository implements InventoryRepository {
             .onErrorMap(exception -> new InventoryTransactionErrorException("Error to database connection on delete inventory by id", exception));
     }
 
+    @Override
+    public Mono<Long> count() throws InventoryTransactionErrorException {
+        return this.repository.count()
+            .onErrorMap(exception -> new InventoryTransactionErrorException("Error to database conection on count invetories existing into database", exception));
+    }
+
 }

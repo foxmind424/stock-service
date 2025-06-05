@@ -98,4 +98,10 @@ public class InventoryController {
         return this.command.deleteById(id);
     }
     
+    @GetMapping("count")
+    public Mono<ResponseEntity<Long>> count() {
+        return this.query.count()
+            .map(response -> ResponseEntity.status(HttpStatus.OK).body(response));
+    }
+    
 }

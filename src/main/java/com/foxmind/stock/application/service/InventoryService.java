@@ -152,4 +152,10 @@ public class InventoryService implements InventoryCommand, InventoryQuery {
                     .onErrorMap(exception -> new InventoryInternalErrorException("Error to delete inventory by id", exception));
             });
     }
+
+    @Override
+    public Mono<Long> count() throws InventoryInternalErrorException {
+        return this.repository.count()
+            .onErrorMap(exception -> new InventoryInternalErrorException("Error to count elements into inventory", exception));
+    }
 }
